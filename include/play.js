@@ -88,10 +88,10 @@ module.exports = {
         i18n.__mf("play.startedPlaying", { title: song.title, url: song.url })
       );
       await playingMessage.react("⏭");
-      await playingMessage.react("⏯");
-      await playingMessage.react("🔇");
-      await playingMessage.react("🔉");
-      await playingMessage.react("🔊");
+      //await playingMessage.react("⏯");
+      //await playingMessage.react("🔇");
+      //await playingMessage.react("🔉");
+      //await playingMessage.react("🔊");
       await playingMessage.react("🔁");
       await playingMessage.react("🔀");
       await playingMessage.react("⏹");
