@@ -6,7 +6,7 @@ module.exports = {
   cooldown: 3,
   description: i18n.__("amogus.description"),
   async execute(message) {
-    const track = Math.floor(Math.random() * max) ? 'https://youtu.be/jKLG0vLhWFI' : 'https://youtu.be/rcWcrL2o9bQ'
+    const track = Math.floor(Math.random() * 10) ? 'https://youtu.be/jKLG0vLhWFI' : 'https://youtu.be/rcWcrL2o9bQ'
     await play(message, [track, '!!']);
   }
 };
