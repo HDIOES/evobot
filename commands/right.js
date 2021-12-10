@@ -1,11 +1,5 @@
 const i18n = require("../util/i18n");
 const { execute: play } = require("./play");
-const ytdl = require("ytdl-core");
-const YouTubeAPI = require("simple-youtube-api");
-const scdl = require("soundcloud-downloader").default;
-const https = require("https");
-const { YOUTUBE_API_KEY, SOUNDCLOUD_CLIENT_ID, DEFAULT_VOLUME } = require("../util/Util");
-const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
 
 module.exports = {
   name: "right",
@@ -29,7 +23,7 @@ module.exports = {
         .reply(i18n.__mf("play.usageReply", { prefix: message.client.prefix }))
         .catch(console.error);
 
-    args = [...args, 'right', 'verson'];
+    args = ['right', 'version', ...args,];
 
     await play(message, args);
   }

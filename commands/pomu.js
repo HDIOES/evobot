@@ -7,6 +7,6 @@ module.exports = {
   description: i18n.__("pomu.description"),
   async execute(message) {
 
-    await play(message, ['https://youtu.be/8KBDqn3WCv4']);
+    await play(message, ['https://youtu.be/8KBDqn3WCv4', '!!']);
   }
 };
