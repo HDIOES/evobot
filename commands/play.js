@@ -36,10 +36,12 @@ module.exports = {
     const search = args.join(" ");
     const videoPattern = /^(https?:\/\/)?(www\.)?(m\.|music\.)?(youtube\.com|youtu\.?be)\/.+$/gi;
     const playlistPattern = /^.*(list=)([^#\&\?]*).*/gi;
+    const forcePattern = /!!$/;
     const scRegex = /^https?:\/\/(soundcloud\.com)\/(.*)$/;
     const mobileScRegex = /^https?:\/\/(soundcloud\.app\.goo\.gl)\/(.*)$/;
     const url = args[0];
     const urlValid = videoPattern.test(args[0]);
+    const force = forcePattern.test(args[args.length - 1]);
 
     // Start the playlist if playlist url was provided
     if (!videoPattern.test(args[0]) && playlistPattern.test(args[0])) {
@@ -119,7 +121,7 @@ module.exports = {
         };
       } catch (error) {
         console.error(error);
-        
+
         if (error.message.includes("410")) {
           return message.reply("Video is age restricted, private or unavailable").catch(console.error);
         } else {
@@ -129,7 +131,12 @@ module.exports = {
     }
 
     if (serverQueue) {
-      serverQueue.songs.push(song);
+      if (force) {
+        serverQueue.songs = [serverQueue.songs[0], ...serverQueue.songs];
+        serverQueue.songs[1] = song;
+      } else {
+        serverQueue.songs.push(song);
+      }
       return serverQueue.textChannel
         .send(i18n.__mf("play.queueAdded", { title: song.title, author: message.author }))
         .catch(console.error);
