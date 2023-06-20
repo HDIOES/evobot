@@ -166,12 +166,14 @@ export class MusicQueue {
       this.resource = resource!;
       this.player.play(this.resource);
       this.resource.volume?.setVolumeLogarithmic(this.volume / 100);
+      this.queueLock = false;
     } catch (error) {
+      this.textChannel.send(i18n.__("play.songAccessErr"))
       console.error(error);
 
-      return this.processQueue();
-    } finally {
+      this.songs.shift();
       this.queueLock = false;
+      return this.processQueue();
     }
   }
 
